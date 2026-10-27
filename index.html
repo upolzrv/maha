@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#09070e">
+<title>♡</title>
+<style>
+:root{color-scheme:dark;--bg:#09070e;--pink:#ffb1d0;--lilac:#bba5ff}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg)}
+body{font-family:system-ui,sans-serif;background:radial-gradient(ellipse at 12% 12%,#49213d 0,transparent 38%),radial-gradient(ellipse at 90% 80%,#282044 0,transparent 43%),#09070e}
+#loader{position:fixed;inset:0;z-index:10;display:grid;place-items:center;background:#08070d;opacity:1;visibility:visible;transition:opacity .9s ease,visibility .9s ease}
+#loader.out{opacity:0;visibility:hidden;pointer-events:none}
+.loader{width:min(72vw,330px);display:flex;flex-direction:column;align-items:center;gap:22px;filter:drop-shadow(0 0 28px #ff85bc20)}
+.love-draw{width:100%;overflow:visible}
+.heart-shadow,.heart-trace,.heart-glow{fill:none;stroke-linecap:round;stroke-linejoin:round}
+.heart-shadow{stroke:#392332;stroke-width:4}
+.heart-trace{stroke:url(#loveInk);stroke-width:3.3;stroke-dasharray:360;stroke-dashoffset:360;animation:drawLove 7.5s cubic-bezier(.42,0,.2,1) forwards;filter:drop-shadow(0 0 7px #ff8fbd75)}
+.heart-glow{stroke:#ffd9e8;stroke-width:1.1;stroke-dasharray:360;stroke-dashoffset:360;animation:drawLove 7.5s cubic-bezier(.42,0,.2,1) forwards;opacity:.85}
+.loader-dots{height:5px;display:flex;gap:7px;align-items:center}
+.loader-dots i{width:4px;height:4px;border-radius:50%;background:#ffacd0;opacity:.3;animation:dotPulse 1s ease-in-out infinite}
+.loader-dots i:nth-child(2){animation-delay:.15s}.loader-dots i:nth-child(3){animation-delay:.3s}
+#album{height:100vh;height:100dvh;display:flex;flex-direction:column;justify-content:center;gap:clamp(12px,2.2vh,24px);opacity:0;transform:scale(1.035);transition:opacity 1.3s ease,transform 1.6s cubic-bezier(.18,.7,.2,1);padding:12px 0}
+#album.ready{opacity:1;transform:scale(1)}
+.window{width:100%;overflow:hidden;position:relative;mask-image:linear-gradient(90deg,transparent,#000 3%,#000 97%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 3%,#000 97%,transparent)}
+.track{display:flex;width:max-content;will-change:transform;animation:slide-left 48s linear infinite}
+.window:nth-child(2) .track{animation-name:slide-right;animation-duration:55s}
+.window:nth-child(3) .track{animation-duration:62s}
+.window:hover .track{animation-play-state:paused}
+.group{display:flex;flex:none;gap:clamp(12px,1.8vw,22px);padding-right:clamp(12px,1.8vw,22px)}
+.photo{position:relative;flex:none;width:clamp(285px,43vw,580px);height:clamp(220px,32vh,380px);padding:3px;border-radius:32px;overflow:hidden;background:linear-gradient(135deg,#ffffff16,#ffafd50a 48%,#b9a5ff0d);border:1px solid #ffffff0c;box-shadow:0 12px 38px #0008,0 0 22px #c27ba30a;isolation:isolate}
+.photo img{width:100%;height:100%;display:block;object-fit:cover;border-radius:29px;background:linear-gradient(135deg,#211520,#171522 60%,#211a2a);transition:transform .75s cubic-bezier(.2,.7,.2,1),filter .75s ease;filter:saturate(.94) brightness(.94)}
+.photo:before{content:"";position:absolute;z-index:1;inset:3px;border-radius:29px;pointer-events:none;background:linear-gradient(145deg,#ffffff08,transparent 45%,#08070e12);box-shadow:inset 0 0 0 1px #ffffff06}
+.photo:hover img{transform:scale(1.035);filter:saturate(1.08)}
+@keyframes slide-left{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes slide-right{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+@keyframes drawLove{0%{stroke-dashoffset:360;opacity:.25}8%{opacity:1}100%{stroke-dashoffset:0;opacity:1}}
+@keyframes dotPulse{0%,100%{opacity:.25;transform:scale(.8)}50%{opacity:1;transform:scale(1.35)}}
+@media(max-width:600px){#album{gap:clamp(14px,2.8vh,24px);padding:8px 0}.photo{width:82vw;height:clamp(230px,28vh,315px);border-radius:25px;padding:4px}.photo img{border-radius:20px}.photo:before{inset:4px;border-radius:20px}.group{gap:12px;padding-right:12px}.track{animation-duration:39s}.window:nth-child(2) .track{animation-duration:45s}.window:nth-child(3) .track{animation-duration:51s}}
+@media(min-width:1100px){#album{gap:22px}.photo{height:min(29vh,330px)}}
+@media(prefers-reduced-motion:reduce){.heart-trace,.heart-glow{animation-duration:1s}.track{animation-duration:100s!important}}
+</style>
+</head>
+<body>
+<div id="loader" aria-hidden="true">
+  <div class="loader">
+    <svg class="love-draw" viewBox="0 0 120 110" role="presentation">
+      <defs>
+        <linearGradient id="loveInk" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#ffb7d5"/>
+          <stop offset="55%" stop-color="#ff78b5"/>
+          <stop offset="100%" stop-color="#c6a4ff"/>
+        </linearGradient>
+      </defs>
+      <path class="heart-shadow" d="M60 100 C48 89 9 61 9 34 C9 12 36 3 52 20 L60 29 L68 20 C84 3 111 12 111 34 C111 61 72 89 60 100 Z"/>
+      <path class="heart-trace" d="M60 100 C48 89 9 61 9 34 C9 12 36 3 52 20 L60 29 L68 20 C84 3 111 12 111 34 C111 61 72 89 60 100 Z"/>
+      <path class="heart-glow" d="M60 100 C48 89 9 61 9 34 C9 12 36 3 52 20 L60 29 L68 20 C84 3 111 12 111 34 C111 61 72 89 60 100 Z"/>
+    </svg>
+    <div class="loader-dots"><i></i><i></i><i></i></div>
+  </div>
+</div>
+<main id="album" aria-label="Photo album">
+  <div class="window"><div class="track" data-row="0"></div></div>
+  <div class="window"><div class="track" data-row="1"></div></div>
+  <div class="window"><div class="track" data-row="2"></div></div>
+</main>
+<script>
+/* Place images in ./images and name them 1.jpg to 12.jpg.
+   Change the names below if you use other filenames/extensions. */
+const imageFiles=Array.from({length:12},(_,i)=>`${i+1}.jpg`);
+const makePhoto=(file,index)=>{
+  const card=document.createElement("div");card.className="photo";
+  const img=document.createElement("img");img.src=`images/${file}`;img.alt="";img.draggable=false;
+  img.onerror=()=>{img.onerror=null;img.style.display="none";card.style.background=`linear-gradient(${135+index*13}deg,#43223e,#26213f 55%,#69415e)`;};
+  card.appendChild(img);return card;
+};
+document.querySelectorAll(".track").forEach((track,rowIndex)=>{
+  const group=document.createElement("div");group.className="group";
+  imageFiles.filter((_,i)=>i%3===rowIndex).forEach((file,i)=>group.appendChild(makePhoto(file,i+rowIndex)));
+  const duplicate=group.cloneNode(true);
+  track.append(group,duplicate);
+});
+// Keep the intro animation visible long enough to feel intentional, then reveal the album.
+window.addEventListener("load",()=>setTimeout(()=>{
+  document.getElementById("loader").classList.add("out");
+  document.getElementById("album").classList.add("ready");
+},7500));
+</script>
+</body>
+</html>
